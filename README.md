@@ -24,6 +24,7 @@ Write your own steps
 
 ## PROGRAM
 
+```sh
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -83,31 +84,38 @@ def display(array1, array2):
 
     plt.show()
 (train_data, _), (test_data, _) = mnist.load_data()
-
+```
 # Normalize and reshape the data
+```sh
 train_data = preprocess(train_data)
 test_data = preprocess(test_data)
-
+```
 # Create a copy of the data with added noise
+```sh
 noisy_train_data = noise(train_data)
 noisy_test_data = noise(test_data)
+```
 
 # Display the train data and a version of it with added noise
+```sh
 display(train_data, noisy_train_data)
 input = layers.Input(shape=(28, 28, 1))
-
+```
 # Encoder
+```sh
 x = layers.Conv2D(32, (3, 3), activation="relu", padding="same")(input)
 x = layers.MaxPooling2D((2, 2), padding="same")(x)
 x = layers.Conv2D(32, (3, 3), activation="relu", padding="same")(x)
 x = layers.MaxPooling2D((2, 2), padding="same")(x)
-
+```
 # Decoder
+```sh
 x = layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(x)
 x = layers.Conv2DTranspose(32, (3, 3), strides=2, activation="relu", padding="same")(x)
 x = layers.Conv2D(1, (3, 3), activation="sigmoid", padding="same")(x)
-
+```
 # Autoencoder
+```sh
 autoencoder = Model(input, x)
 autoencoder.compile(optimizer="adam", loss="binary_crossentropy")
 autoencoder.summary()
@@ -131,7 +139,7 @@ autoencoder.fit(
 )
 predictions = autoencoder.predict(noisy_test_data)
 display(noisy_test_data, predictions)
-
+```
 ## OUTPUT
 ![image](https://user-images.githubusercontent.com/112503943/203128183-e9ba46cb-43dc-469f-9e9d-990c1b8c1272.png)
 
