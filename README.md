@@ -4,12 +4,6 @@
 
 To develop a convolutional autoencoder for image denoising application.
 
-## Problem Statement and Dataset
-
-## Convolution Autoencoder Network Model
-
-Include the neural network model diagram.
-
 ## DESIGN STEPS
 
 ### STEP 1:  Setup the data
